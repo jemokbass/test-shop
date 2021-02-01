@@ -323,13 +323,10 @@ module.exports = function (webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
         '@Src': path.resolve('src/'),
-        '@Assets': path.resolve('src/assets/'),
-        '@Components': path.resolve('src/components/'),
-        '@Containers': path.resolve('src/containers/'),
-        // Support React Native Web
-        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+        '@Assets': path.resolve('src/assets'),
+        '@Components': path.resolve('src/components'),
+        '@Containers': path.resolve('src/containers'),
         'react-native': 'react-native-web',
-        // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',
           'scheduler/tracing': 'scheduler/tracing-profiling',

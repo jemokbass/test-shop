@@ -2,10 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@Src/": ["./src/*"],
-      "@Assets/": ["./src/assets/*"],
-      "@Components/": ["./src/components/*"],
-      "@Containers/": ["./src/containers/*"]
-    }
+      "@Src/*": ["./src/*"],
+      "@Assets/*": ["./src/assets/*"],
+      "@Components/*": ["./src/components/*"],
+      "@Containers/*": ["./src/containers/*"]
+    },
+    "lib": ["es6", "dom"],
+    "target": "es6"
   }
 }
