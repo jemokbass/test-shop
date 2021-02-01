@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './BurgerIngredient.css';
-import { render } from 'node_modules/@testing-library/react/types/index';
 
 class BurgerIngredient extends Component {
   render() {
-    const ingredient = null;
+    let ingredient = null;
 
     switch (this.props.type) {
       case 'bread-bottom':
