@@ -30,3 +30,8 @@
 .build-control__more {
   background: #f38011;
 }
+
+.build-control button[disabled] {
+  pointer-events: none;
+  opacity: 0.6;
+}
