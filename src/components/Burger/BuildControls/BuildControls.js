@@ -14,7 +14,7 @@ const BuildControls = ({
   removeIngredient,
   disabled,
   price,
-  onClick,
+  ordered,
   purchasable,
 }) => {
   return (
@@ -34,7 +34,7 @@ const BuildControls = ({
       <button
         className="order-button"
         type="button"
-        onClick={onClick}
+        onClick={ordered}
         disabled={!purchasable}
       >
         ORDER NOW
