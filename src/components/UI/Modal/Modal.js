@@ -1,17 +1,22 @@
 import React from 'react';
+import Aux from '@Src/hoc/Aux';
+import Backdrop from '../Backdrop/Backdrop';
 import './Modal.css';
 
-const Modal = ({ children, show }) => {
+const Modal = ({ children, show, closeModal }) => {
   return (
-    <div
-      className="modal"
-      style={{
-        transform: show ? 'translateY(0)' : 'translateY(-200vh)',
-        opacity: show ? '1' : '0',
-      }}
-    >
-      {children}
-    </div>
+    <Aux>
+      <Backdrop show={show} clicked={closeModal} />
+      <div
+        className="modal"
+        style={{
+          transform: show ? 'translateY(0)' : 'translateY(-200vh)',
+          opacity: show ? '1' : '0',
+        }}
+      >
+        {children}
+      </div>
+    </Aux>
   );
 };
 
