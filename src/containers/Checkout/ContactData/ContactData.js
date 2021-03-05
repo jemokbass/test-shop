@@ -20,7 +20,7 @@ class ContactData extends Component {
     e.preventDefault();
     const order = {
       ingredients: this.props.ingredients,
-      price: this.state.totalPrice,
+      price: this.props.price,
       customer: {
         name: this.state.name,
         address: {

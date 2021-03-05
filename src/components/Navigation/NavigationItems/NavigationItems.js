@@ -4,9 +4,10 @@ import './NavigationItems.css';
 
 const NavigationItems = () => {
   const navigation = [
-    { title: 'Burger Builder', active: true, link: '/' },
-    { title: 'Checkout', link: '/' },
+    { title: 'Burger Builder', link: '/', exact: true },
+    { title: 'Orders', link: '/orders' },
   ];
+
   return (
     <ul className="navigation-items">
       {navigation.map(item => {
@@ -15,7 +16,7 @@ const NavigationItems = () => {
             key={item.title}
             children={item.title}
             link={item.link}
-            active={item.active}
+            exact={item.exact}
           />
         );
       })}

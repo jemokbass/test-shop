@@ -133,7 +133,7 @@ class BurgerBuilder extends Component {
           ingredients={this.state.ingredients}
           continuePurchase={this.continuePurchaseHandler}
           closePurchase={this.closeModalHandler}
-          totalPrice={this.state.totalPrice}
+          totalPrice={this.state.totalPrice.toFixed(2)}
         />
       );
     }
