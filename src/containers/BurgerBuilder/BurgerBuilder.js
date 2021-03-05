@@ -14,24 +14,27 @@ const INGREDIENT_PRICES = {
   meat: 1.2,
   bacon: 0.7,
 };
-export class BurgerBuilder extends Component {
+class BurgerBuilder extends Component {
   state = {
     ingredients: null,
     totalPrice: 2,
     purchasable: false,
     purchasing: false,
     loading: false,
-    error: false
+    error: false,
   };
 
   componentDidMount() {
-    axios.get(
-      'https://mytestreact-8ebdb-default-rtdb.firebaseio.com/ingredients.json'
-    ).then((result) => {
-      this.setState({ingredients: result.data})
-    }).catch((err) => {
-      this.setState({error: true})
-    });
+    axios
+      .get(
+        'https://mytestreact-8ebdb-default-rtdb.firebaseio.com/ingredients.json'
+      )
+      .then(result => {
+        this.setState({ ingredients: result.data });
+      })
+      .catch(err => {
+        this.setState({ error: true });
+      });
   }
 
   updatePurchaseState(ingredients) {
@@ -79,30 +82,23 @@ export class BurgerBuilder extends Component {
   };
 
   continuePurchaseHandler = () => {
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Jan beautiful',
-        address: {
-          street: 'testStreet',
-          zipCode: '301360',
-          country: 'Russia',
-        },
-        email: 'test@test.com',
-      },
-      deliveryMethod: 'Fastest',
-    };
-    this.setState({ loading: true });
+    const queryParams = [];
 
-    axios
-      .post('/orders.json', order)
-      .then(result => {
-        this.setState({ loading: false, purchasing: false });
-      })
-      .catch(err => {
-        this.setState({ loading: false, purchasing: false });
-      });
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          '=' +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+    queryParams.push('price=' + this.state.totalPrice);
+
+    const queryString = queryParams.join('&');
+
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?' + queryString,
+    });
   };
 
   render() {
@@ -110,9 +106,9 @@ export class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
-    let orderSummary = null
+    let orderSummary = null;
     let burger = this.state.error ? (
-      <p style={{textAlign: 'center'}}>Ingredient's can't be a loaded</p>
+      <p style={{ textAlign: 'center' }}>Ingredient's can't be a loaded</p>
     ) : (
       <Spinner />
     );
