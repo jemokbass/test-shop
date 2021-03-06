@@ -4,14 +4,61 @@ import Button from '@Src/components/UI/Button/Button';
 import './ContactData.css';
 import Spinner from '@Src/components/UI/Spinner/Spinner';
 import { withRouter } from 'react-router';
+import Input from '@Src/components/UI/Input/Input';
 
 class ContactData extends Component {
   state = {
-    name: '',
-    email: '',
-    address: {
-      street: '',
-      postalCode: '',
+    orderForm: {
+      name: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Name',
+        },
+        value: '',
+      },
+      street: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Street',
+        },
+        value: '',
+      },
+      zipCode: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'ZIP CODE',
+        },
+        value: '',
+      },
+      country: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Country',
+        },
+        value: '',
+      },
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your E-Mail',
+        },
+        value: '',
+      },
+      deliveryMethod: {
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            { value: 'fastest', displayValue: 'Fastest' },
+            { value: 'cheapest', displayValue: 'Cheapest' },
+          ],
+        },
+        value: '',
+      },
     },
     loading: false,
   };
@@ -46,40 +93,21 @@ class ContactData extends Component {
   };
 
   render() {
+    const formElementsArr = [];
+    for (let key in this.state.orderForm) {
+      formElementsArr.push({ id: key, config: this.state.orderForm[key] });
+    }
+
     let form = (
       <form>
-        <input
-          className="input"
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={this.state.name}
-          onChange={e => this.setState({ name: e.target.value })}
-        />
-        <input
-          className="input"
-          type="email"
-          name="email"
-          placeholder="Your Mail"
-          value={this.state.email}
-          onChange={e => this.setState({ email: e.target.value })}
-        />
-        <input
-          className="input"
-          type="text"
-          name="street"
-          placeholder="Your street"
-          value={this.state.address.street}
-          //onChange={e => this.setState({ address: e.target.value })}
-        />
-        <input
-          className="input"
-          type="text"
-          name="postal"
-          placeholder="Your postal code"
-          value={this.state.address.postalCode}
-          //onChange={e => this.setState({ address: e.target.value })}
-        />
+        {formElementsArr.map(formElement => (
+          <Input
+            elementType={formElement.config.elementType}
+            key={formElement.id}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+          />
+        ))}
         <Button btnType="success" clicked={this.orderHandler}>
           ORDER
         </Button>
