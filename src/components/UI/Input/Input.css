@@ -23,3 +23,8 @@
   background: #ccc;
   outline: none;
 }
+
+.input__element.invalid {
+  border: 1px solid #ff000f;
+  background: #fa8070;
+}
