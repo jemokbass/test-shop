@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Aux from '@Src/hoc/Aux/Aux';
 import Burger from '@Src/components/Burger/Burger';
 import BuildControls from '@Src/components/Burger/BuildControls/BuildControls';
@@ -7,27 +8,17 @@ import OrderSummary from '@Src/components/Burger/OrderSummary/OrderSummary';
 import axios from '@Src/axios-orders';
 import Spinner from '@Src/components/UI/Spinner/Spinner';
 import withErrorHandler from '@Src/hoc/withErrorHandler/withErrorHandler';
-import { connect } from 'react-redux';
-import { ADD_INGREDIENTS, REMOVE_INGREDIENTS } from '@Src/store/actions';
+import {
+  addIngredient,
+  removeIngredient,
+} from '@Src/store/actions/burgerBuilder';
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
-    loading: false,
-    error: false,
   };
 
   componentDidMount() {
     console.log(this.props);
-    //axios
-    //  .get(
-    //    'https://mytestreact-8ebdb-default-rtdb.firebaseio.com/ingredients.json'
-    //  )
-    //  .then(result => {
-    //    this.setState({ ingredients: result.data });
-    //  })
-    //  .catch(err => {
-    //    this.setState({ error: true });
-    //  });
   }
 
   updatePurchaseState(ingredients) {
@@ -90,10 +81,6 @@ class BurgerBuilder extends Component {
       );
     }
 
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
-    }
-
     return (
       <Aux>
         <Modal show={this.state.purchasing} closeModal={this.closeModalHandler}>
@@ -111,10 +98,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onIngredientAdded: ingName =>
-    dispatch({ type: ADD_INGREDIENTS, ingredientName: ingName }),
-  onIngredientRemoved: ingName =>
-    dispatch({ type: REMOVE_INGREDIENTS, ingredientName: ingName }),
+  onIngredientAdded: ingName => dispatch(addIngredient(ingName)),
+  onIngredientRemoved: ingName => dispatch(removeIngredient(ingName)),
 });
 
 export default connect(
