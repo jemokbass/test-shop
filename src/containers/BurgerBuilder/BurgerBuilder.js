@@ -10,6 +10,7 @@ import Spinner from '@Src/components/UI/Spinner/Spinner';
 import withErrorHandler from '@Src/hoc/withErrorHandler/withErrorHandler';
 import {
   addIngredient,
+  initIngredients,
   removeIngredient,
 } from '@Src/store/actions/burgerBuilder';
 class BurgerBuilder extends Component {
@@ -18,7 +19,7 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
+    this.props.onInitIngredients()
   }
 
   updatePurchaseState(ingredients) {
@@ -50,7 +51,7 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-    let burger = this.state.error ? (
+    let burger = this.props.error ? (
       <p style={{ textAlign: 'center' }}>Ingredient's can't be a loaded</p>
     ) : (
       <Spinner />
@@ -95,11 +96,13 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => ({
   ing: state.ingredients,
   price: state.totalPrice,
+  error: state.error
 });
 
 const mapDispatchToProps = dispatch => ({
   onIngredientAdded: ingName => dispatch(addIngredient(ingName)),
   onIngredientRemoved: ingName => dispatch(removeIngredient(ingName)),
+  onInitIngredients: () => dispatch(initIngredients())
 });
 
 export default connect(

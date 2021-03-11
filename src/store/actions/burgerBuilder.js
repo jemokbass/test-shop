@@ -20,17 +20,15 @@ export const fetchIngredientsFailed = () => ({
   type: actionTypes.FETCH_INGREDIENTS_FAILED,
 });
 
-export const initIngredients = () => {
-  return dispatch => {
-    axios
-      .get(
-        'https://mytestreact-8ebdb-default-rtdb.firebaseio.com/ingredients.json'
-      )
-      .then(result => {
-        dispatch(setIngredients(result.data));
-      })
-      .catch(err => {
-        fetchIngredientsFailed();
-      });
-  };
-};
+export const initIngredients = () => (dispatch => {
+  axios
+    .get(
+      'https://mytestreact-8ebdb-default-rtdb.firebaseio.com/ingredients.json'
+    )
+    .then(result => {
+      dispatch(setIngredients(result.data));
+    })
+    .catch(err => {
+      dispatch(fetchIngredientsFailed());
+    });
+})
