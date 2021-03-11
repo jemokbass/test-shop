@@ -6,6 +6,7 @@ import Spinner from '@Src/components/UI/Spinner/Spinner';
 import { withRouter } from 'react-router';
 import Input from '@Src/components/UI/Input/Input';
 import { connect } from 'react-redux';
+import { purchaseBurger } from '@Src/store/actions/order';
 
 class ContactData extends Component {
   state = {
@@ -90,7 +91,6 @@ class ContactData extends Component {
       },
     },
     formIsValid: false,
-    loading: false,
   };
 
   orderHandler = e => {
@@ -105,16 +105,6 @@ class ContactData extends Component {
       price: this.props.price,
       orderData: formData,
     };
-
-    axios
-      .post('/orders.json', order)
-      .then(result => {
-        this.setState({ loading: false });
-        this.props.history.push('/');
-      })
-      .catch(err => {
-        this.setState({ loading: false });
-      });
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -180,7 +170,7 @@ class ContactData extends Component {
       </form>
     );
 
-    if (this.state.loading) form = <Spinner />;
+    if (this.props.loading) form = <Spinner />;
 
     return (
       <div className="contact-data">
@@ -194,6 +184,14 @@ class ContactData extends Component {
 const mapStateToProps = state => ({
   ing: state.ingredients,
   price: state.totalPrice,
+  loading: state.loading,
 });
 
-export default connect(mapStateToProps)(withRouter(ContactData));
+const mapDispatchToProps = dispatch => ({
+  onOrderBurger: orderData => dispatch(purchaseBurger(orderData)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ContactData));

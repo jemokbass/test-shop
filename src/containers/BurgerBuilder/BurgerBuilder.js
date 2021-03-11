@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Aux from '@Src/hoc/Aux/Aux';
 import Burger from '@Src/components/Burger/Burger';
 import BuildControls from '@Src/components/Burger/BuildControls/BuildControls';
 import Modal from '@Src/components/UI/Modal/Modal';
@@ -19,7 +18,7 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    this.props.onInitIngredients()
+    this.props.onInitIngredients();
   }
 
   updatePurchaseState(ingredients) {
@@ -59,7 +58,7 @@ class BurgerBuilder extends Component {
 
     if (this.props.ing) {
       burger = (
-        <Aux>
+        <Fragment>
           <Burger ingredients={this.props.ing} />
           <BuildControls
             addIngredient={this.props.onIngredientAdded}
@@ -69,7 +68,7 @@ class BurgerBuilder extends Component {
             purchasable={this.updatePurchaseState(this.props.ing)}
             ordered={this.purchaseHandler}
           />
-        </Aux>
+        </Fragment>
       );
 
       orderSummary = (
@@ -83,12 +82,12 @@ class BurgerBuilder extends Component {
     }
 
     return (
-      <Aux>
+      <Fragment>
         <Modal show={this.state.purchasing} closeModal={this.closeModalHandler}>
           {orderSummary}
         </Modal>
         {burger}
-      </Aux>
+      </Fragment>
     );
   }
 }
@@ -96,13 +95,13 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => ({
   ing: state.ingredients,
   price: state.totalPrice,
-  error: state.error
+  error: state.error,
 });
 
 const mapDispatchToProps = dispatch => ({
   onIngredientAdded: ingName => dispatch(addIngredient(ingName)),
   onIngredientRemoved: ingName => dispatch(removeIngredient(ingName)),
-  onInitIngredients: () => dispatch(initIngredients())
+  onInitIngredients: () => dispatch(initIngredients()),
 });
 
 export default connect(

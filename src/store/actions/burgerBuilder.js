@@ -20,7 +20,7 @@ export const fetchIngredientsFailed = () => ({
   type: actionTypes.FETCH_INGREDIENTS_FAILED,
 });
 
-export const initIngredients = () => (dispatch => {
+export const initIngredients = () => dispatch => {
   axios
     .get(
       'https://mytestreact-8ebdb-default-rtdb.firebaseio.com/ingredients.json'
@@ -31,4 +31,4 @@ export const initIngredients = () => (dispatch => {
     .catch(err => {
       dispatch(fetchIngredientsFailed());
     });
-})
+};

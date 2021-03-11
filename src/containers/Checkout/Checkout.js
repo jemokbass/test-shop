@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import React, { Component, Fragment } from 'react';
+import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import OrderCheckoutSummary from '@Src/components/Order/OrderCheckoutSummary/OrderCheckoutSummary';
 import ContactData from './ContactData/ContactData';
@@ -14,19 +14,24 @@ class Checkout extends Component {
   };
 
   render() {
-    return (
-      <div>
-        <OrderCheckoutSummary
-          ingredients={this.props.ing}
-          checkoutCancel={this.checkoutCancelHandler}
-          checkoutContinue={this.checkoutContinueHandler}
-        />
-        <Route
-          path={this.props.match.path + '/contact-data'}
-          component={ContactData}
-        />
-      </div>
-    );
+    let summary = <Redirect to="/" />;
+    if (this.props.ing) {
+      summary = (
+        <Fragment>
+          <OrderCheckoutSummary
+            ingredients={this.props.ing}
+            checkoutCancel={this.checkoutCancelHandler}
+            checkoutContinue={this.checkoutContinueHandler}
+          />
+          <Route
+            path={this.props.match.path + '/contact-data'}
+            component={ContactData}
+          />
+        </Fragment>
+      );
+    }
+
+    return <div>{summary}</div>;
   }
 }
 
