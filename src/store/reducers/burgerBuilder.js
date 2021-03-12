@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   ingredients: null,
-  totalPrice: 2,
+  totalPrice: null,
   loading: false,
   error: false,
 };
@@ -25,6 +25,17 @@ const reducer = (state = initialState, action) => {
         },
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
       };
+    case actionTypes.SET_INITIAL_PRICE:
+      return {
+        ...state,
+        totalPrice: action.price,
+        error: false,
+      };
+    case actionTypes.ERROR_INITIAL_PRICE:
+      return {
+        ...state,
+        error: true,
+      };
     case actionTypes.REMOVE_INGREDIENT:
       return {
         ...state,
@@ -38,6 +49,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: action.ingredients,
+        totalPrice: state.totalPrice,
+        error: false,
       };
     case actionTypes.FETCH_INGREDIENTS_FAILED:
       return {

@@ -9,15 +9,18 @@ import Spinner from '@Src/components/UI/Spinner/Spinner';
 import withErrorHandler from '@Src/hoc/withErrorHandler/withErrorHandler';
 import {
   addIngredient,
+  initialPrice,
   initIngredients,
   removeIngredient,
 } from '@Src/store/actions/burgerBuilder';
+import { purchaseInit } from '@Src/store/actions/order';
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
   };
 
   componentDidMount() {
+    this.props.onInitPrice();
     this.props.onInitIngredients();
   }
 
@@ -41,6 +44,7 @@ class BurgerBuilder extends Component {
   };
 
   continuePurchaseHandler = () => {
+    this.props.onInitPurchase();
     this.props.history.push('/checkout');
   };
 
@@ -56,7 +60,7 @@ class BurgerBuilder extends Component {
       <Spinner />
     );
 
-    if (this.props.ing) {
+    if (this.props.ing && this.props.price) {
       burger = (
         <Fragment>
           <Burger ingredients={this.props.ing} />
@@ -93,15 +97,17 @@ class BurgerBuilder extends Component {
 }
 
 const mapStateToProps = state => ({
-  ing: state.ingredients,
-  price: state.totalPrice,
-  error: state.error,
+  ing: state.burgerBuilder.ingredients,
+  price: state.burgerBuilder.totalPrice,
+  error: state.burgerBuilder.error,
 });
 
 const mapDispatchToProps = dispatch => ({
   onIngredientAdded: ingName => dispatch(addIngredient(ingName)),
   onIngredientRemoved: ingName => dispatch(removeIngredient(ingName)),
+  onInitPrice: () => dispatch(initialPrice()),
   onInitIngredients: () => dispatch(initIngredients()),
+  onInitPurchase: () => dispatch(purchaseInit()),
 });
 
 export default connect(
