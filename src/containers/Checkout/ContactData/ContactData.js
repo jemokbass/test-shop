@@ -85,11 +85,16 @@ class ContactData extends Component {
         elementType: 'select',
         elementConfig: {
           options: [
+            { value: 'none', displayValue: 'None' },
             { value: 'fastest', displayValue: 'Fastest' },
             { value: 'cheapest', displayValue: 'Cheapest' },
           ],
         },
-        value: 'fastest',
+        value: 'none',
+        valid: false,
+        validation: {
+          isSelect: true,
+        },
       },
     },
     formIsValid: false,
@@ -151,6 +156,10 @@ class ContactData extends Component {
     if (rules.isNumeric) {
       const pattern = /^\d+$/;
       isValid = pattern.test(value) && isValid;
+    }
+
+    if (rules.isSelect) {
+      isValid = value !== 'none';
     }
 
     return isValid;
