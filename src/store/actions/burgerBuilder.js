@@ -13,12 +13,12 @@ export const removeIngredient = name => ({
 
 export const setIngredients = ingredients => ({
   type: actionTypes.SET_INGREDIENTS,
-  ingredients: ingredients,
+  ingredients,
 });
 
 export const setInitialPrice = price => ({
   type: actionTypes.SET_INITIAL_PRICE,
-  price: price,
+  price,
 });
 
 export const errorInitialPrice = () => ({

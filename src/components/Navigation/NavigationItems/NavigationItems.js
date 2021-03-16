@@ -6,6 +6,7 @@ const NavigationItems = () => {
   const navigation = [
     { title: 'Burger Builder', link: '/', exact: true },
     { title: 'Orders', link: '/orders' },
+    { title: 'Authenticate', link: '/login' },
   ];
 
   return (

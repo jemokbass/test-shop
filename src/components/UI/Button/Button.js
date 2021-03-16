@@ -2,10 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 
-const Button = ({ children, clicked, type, btnType, uppercase, disabled }) => {
+const Button = ({
+  children,
+  clicked,
+  type,
+  btnType,
+  uppercase,
+  disabled,
+  className,
+}) => {
   return (
     <button
-      className={['button', btnType, uppercase && 'uppercase'].join(' ')}
+      className={['button', btnType, className, uppercase && 'uppercase'].join(
+        ' '
+      )}
       onClick={clicked}
       type={type}
       disabled={disabled}
@@ -20,6 +30,7 @@ Button.default = {
   children: '',
   btnType: '',
   uppercase: '',
+  className: '',
 };
 
 Button.propTypes = {
@@ -27,6 +38,7 @@ Button.propTypes = {
   children: PropTypes.node,
   btnType: PropTypes.oneOf(['success', 'danger']),
   uppercase: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Button;

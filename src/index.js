@@ -7,12 +7,14 @@ import { Provider } from 'react-redux';
 import App from './App';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
+import authReducer from './store/reducers/auth';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
   order: orderReducer,
+  auth: authReducer,
 });
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));

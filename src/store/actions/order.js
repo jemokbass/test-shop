@@ -35,12 +35,12 @@ export const purchaseInit = () => ({
 
 export const fetchOrdersSuccess = orders => ({
   type: actionTypes.FETCH_ORDERS_SUCCESS,
-  orders: orders,
+  orders,
 });
 
 export const fetchOrderError = error => ({
   type: actionTypes.FETCH_ORDERS_FAIL,
-  error: error,
+  error,
 });
 
 export const fetchOrdersStart = () => ({
