@@ -21,6 +21,7 @@
   display: block;
   max-width: 200px;
   margin: 0 auto;
+  padding: 0;
 }
 
 .auth__error {

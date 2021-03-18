@@ -136,7 +136,7 @@ class Auth extends Component {
         <form className="auth__inner" onSubmit={this.submitHandler}>
           {form}
           {error}
-          <Button btnType="success">
+          <Button btnType="success" className="auth__btn">
             {this.state.isSignUp ? 'Sign Up' : 'Sign In'}
           </Button>
         </form>
