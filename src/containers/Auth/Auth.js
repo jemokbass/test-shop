@@ -5,6 +5,7 @@ import './Auth.css';
 import { auth } from '@Src/store/actions/auth';
 import { connect } from 'react-redux';
 import Spinner from '@Src/components/UI/Spinner/Spinner';
+import { Redirect } from 'react-router';
 
 class Auth extends Component {
   state = {
@@ -38,7 +39,7 @@ class Auth extends Component {
         touched: false,
       },
     },
-    isSignUp: true,
+    isSignUp: false,
   };
 
   checkValidity(value, rules = true) {
@@ -147,6 +148,7 @@ class Auth extends Component {
         >
           Switch to {this.state.isSignUp ? 'Sign In' : 'Sign Up'}
         </Button>
+        {this.props.isAuthenticated && <Redirect to="/" />}
       </div>
     );
 
@@ -160,6 +162,7 @@ class Auth extends Component {
 const mapStateToProps = state => ({
   loading: state.auth.loading,
   error: state.auth.error,
+  isAuthenticated: state.auth.token !== null,
 });
 
 const mapDispatchToProps = dispatch => ({
