@@ -5,7 +5,7 @@ import './NavigationItems.css';
 const NavigationItems = ({ isAuthenticated }) => {
   let navigation = [
     { title: 'Burger Builder', link: '/', exact: true },
-    { title: 'Authenticate', link: '/login' },
+    { title: 'Authenticate', link: '/auth' },
   ];
 
   if (isAuthenticated) {

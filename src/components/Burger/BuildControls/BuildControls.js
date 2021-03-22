@@ -36,11 +36,10 @@ const BuildControls = ({
         className="order-button"
         type="button"
         onClick={ordered}
-        disabled={!purchasable || !isAuthenticated}
+        disabled={!purchasable}
       >
-        ORDER NOW
+        {isAuthenticated ? 'ORDER NOW' : 'SIGN UP TO ORDER'}
       </button>
-      {!isAuthenticated && <p>Please, log in before purchasing!</p>}
     </div>
   );
 };

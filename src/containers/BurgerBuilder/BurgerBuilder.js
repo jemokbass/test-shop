@@ -14,6 +14,7 @@ import {
   removeIngredient,
 } from '@Src/store/actions/burgerBuilder';
 import { purchaseInit } from '@Src/store/actions/order';
+import { setAuthRedirectPath } from '@Src/store/actions/auth';
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
@@ -36,7 +37,12 @@ class BurgerBuilder extends Component {
   }
 
   purchaseHandler = () => {
-    this.setState({ purchasing: true });
+    if (this.props.isAuthenticated) {
+      this.setState({ purchasing: true });
+    } else {
+      this.props.onSetAuthRedirectPath('/checkout');
+      this.props.history.push('/auth');
+    }
   };
 
   closeModalHandler = () => {
@@ -110,6 +116,7 @@ const mapDispatchToProps = dispatch => ({
   onInitPrice: () => dispatch(initialPrice()),
   onInitIngredients: () => dispatch(initIngredients()),
   onInitPurchase: () => dispatch(purchaseInit()),
+  onSetAuthRedirectPath: path => dispatch(setAuthRedirectPath(path)),
 });
 
 export default connect(
