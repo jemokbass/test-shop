@@ -46,7 +46,6 @@ export const auth = (email, password, isSignUp) => dispatch => {
       const expirationDate = new Date(
         new Date().getTime() + result.data.expiresIn * 1000
       );
-      console.log(result);
       localStorage.setItem('token', result.data.idToken);
       localStorage.setItem('expirationDate', expirationDate);
       localStorage.setItem('userId', result.data.localId);

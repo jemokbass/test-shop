@@ -14,7 +14,7 @@ const SideDrawer = ({ show, closed, isAuthenticated }) => {
   return (
     <Fragment>
       <Backdrop show={show} clicked={closed} />
-      <div className={attachedClasses.join(' ')}>
+      <div className={attachedClasses.join(' ')} onClick={closed}>
         <Logo />
         <nav>
           <NavigationItems isAuthenticated={isAuthenticated} />
