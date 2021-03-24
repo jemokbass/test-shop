@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import axios from '@Src/axios-orders';
-import Order from '@Src/components/Order/Order';
-import withErrorHandler from '@Src/hoc/withErrorHandler/withErrorHandler';
+import axios from '@src/axios-orders';
+import Order from '@src/components/Order/Order';
+import withErrorHandler from '@src/hoc/withErrorHandler/withErrorHandler';
 import { connect } from 'react-redux';
-import { fetchOrders } from '@Src/store/actions/order';
-import Spinner from '@Src/components/UI/Spinner/Spinner';
+import { fetchOrders } from '@src/store/actions/order';
+import Spinner from '@src/components/UI/Spinner/Spinner';
 
 class Orders extends Component {
   componentDidMount() {

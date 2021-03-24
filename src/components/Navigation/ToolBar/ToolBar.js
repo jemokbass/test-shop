@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '@Src/components/Logo/Logo';
+import Logo from '@src/components/Logo/Logo';
 import './ToolBar.css';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';

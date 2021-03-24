@@ -1,6 +1,6 @@
 import React from 'react';
-import Burger from '@Src/components/Burger/Burger';
-import Button from '@Src/components/UI/Button/Button';
+import Burger from '@src/components/Burger/Burger';
+import Button from '@src/components/UI/Button/Button';
 import './OrderCheckoutSummary.css';
 
 const OrderCheckoutSummary = ({

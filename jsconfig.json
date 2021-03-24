@@ -5,10 +5,7 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "@Src/*": ["./src/*"],
-      "@Assets/*": ["./src/assets/*"],
-      "@Components/*": ["./src/components/*"],
-      "@Containers/*": ["./src/containers/*"]
+      "@src/*": ["./src/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"]

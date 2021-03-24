@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import OrderCheckoutSummary from '@Src/components/Order/OrderCheckoutSummary/OrderCheckoutSummary';
+import OrderCheckoutSummary from '@src/components/Order/OrderCheckoutSummary/OrderCheckoutSummary';
 import ContactData from './ContactData/ContactData';
 
 class Checkout extends Component {

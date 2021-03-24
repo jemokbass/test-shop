@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from 'react';
-import Layout from '@Src/components/Layout/Layout';
+import Layout from '@src/components/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';

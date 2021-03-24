@@ -1,21 +1,23 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Burger from '@Src/components/Burger/Burger';
-import BuildControls from '@Src/components/Burger/BuildControls/BuildControls';
-import Modal from '@Src/components/UI/Modal/Modal';
-import OrderSummary from '@Src/components/Burger/OrderSummary/OrderSummary';
-import axios from '@Src/axios-orders';
-import Spinner from '@Src/components/UI/Spinner/Spinner';
-import withErrorHandler from '@Src/hoc/withErrorHandler/withErrorHandler';
+
+import Burger from '@src/components/Burger/Burger';
+import BuildControls from '@src/components/Burger/BuildControls/BuildControls';
+import axios from '@src/axios-orders';
+import Modal from '@src/components/UI/Modal/Modal';
+import OrderSummary from '@src/components/Burger/OrderSummary/OrderSummary';
+import Spinner from '@src/components/UI/Spinner/Spinner';
+import withErrorHandler from '@src/hoc/withErrorHandler/withErrorHandler';
+
 import {
   addIngredient,
   initialPrice,
   initIngredients,
   removeIngredient,
-} from '@Src/store/actions/burgerBuilder';
-import { purchaseInit } from '@Src/store/actions/order';
-import { setAuthRedirectPath } from '@Src/store/actions/auth';
-class BurgerBuilder extends Component {
+} from '@src/store/actions/burgerBuilder';
+import { purchaseInit } from '@src/store/actions/order';
+import { setAuthRedirectPath } from '@src/store/actions/auth';
+export class BurgerBuilder extends Component {
   state = {
     purchasing: false,
   };

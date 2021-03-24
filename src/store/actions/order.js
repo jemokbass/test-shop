@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from '@Src/axios-orders';
+import axios from '@src/axios-orders';
 
 export const purchaseBurgerSuccess = (id, orderData) => ({
   type: actionTypes.PURCHASE_BURGER_SUCCESS,
