@@ -1,0 +1,17 @@
+.order-checkout-summary {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.order-checkout-summary__burger {
+  width: 100%;
+  min-height: 300px;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .order-checkout-summary {
+    width: 500px;
+  }
+}
