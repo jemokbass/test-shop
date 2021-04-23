@@ -1,10 +1,13 @@
 import React from 'react';
+
 import Logo from '@src/components/Logo/Logo';
-import './ToolBar.css';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
+import './ToolBar.css';
 
-const ToolBar = ({ drawerToggleClicked, isAuthenticated }) => {
+const ToolBar = props => {
+  const { drawerToggleClicked, isAuthenticated } = props;
+
   return (
     <header className="toolbar">
       <DrawerToggle clicked={drawerToggleClicked} />

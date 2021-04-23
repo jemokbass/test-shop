@@ -1,43 +1,31 @@
 import React from 'react';
+
 import './Input.css';
 
 const Input = props => {
+  const { invalid, shouldValidate, touched, elementType, elementConfig, value, changed, label } = props;
   let inputElement = null;
   const inputClasses = ['input__element'];
 
-  if (props.invalid && props.shouldValidate && props.touched) {
+  if (invalid && shouldValidate && touched) {
     inputClasses.push('invalid');
   }
 
-  switch (props.elementType) {
+  switch (elementType) {
     case 'input':
       inputElement = (
-        <input
-          className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
-          onChange={props.changed}
-        />
+        <input className={inputClasses.join(' ')} {...elementConfig} value={value} onChange={changed} />
       );
       break;
     case 'textarea':
       inputElement = (
-        <textarea
-          className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
-          onChange={props.changed}
-        />
+        <textarea className={inputClasses.join(' ')} {...elementConfig} value={value} onChange={changed} />
       );
       break;
     case 'select':
       inputElement = (
-        <select
-          className={inputClasses.join(' ')}
-          value={props.value}
-          onChange={props.changed}
-        >
-          {props.elementConfig.options.map(item => {
+        <select className={inputClasses.join(' ')} value={value} onChange={changed}>
+          {elementConfig.options.map(item => {
             return (
               <option value={item.value} key={item.value}>
                 {item.displayValue}
@@ -49,23 +37,17 @@ const Input = props => {
       break;
     default:
       inputElement = (
-        <input
-          className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
-          onChange={props.changed}
-        />
+        <input className={inputClasses.join(' ')} {...elementConfig} value={value} onChange={changed} />
       );
   }
 
   let validationError = null;
 
-  if (props.invalid && props.touched)
-    validationError = <span>Please, enter a valid value</span>;
+  if (invalid && touched) validationError = <span>Please, enter a valid value</span>;
 
   return (
     <div className="input">
-      <label className="input__label">{props.label}</label>
+      <label className="input__label">{label}</label>
       {inputElement}
       {validationError}
     </div>

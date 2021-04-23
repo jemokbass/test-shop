@@ -1,13 +1,12 @@
 import React from 'react';
+
 import Burger from '@src/components/Burger/Burger';
 import Button from '@src/components/UI/Button/Button';
 import './OrderCheckoutSummary.css';
 
-const OrderCheckoutSummary = ({
-  ingredients,
-  checkoutCancel,
-  checkoutContinue,
-}) => {
+const OrderCheckoutSummary = props => {
+  const { ingredients, checkoutCancel, checkoutContinue } = props;
+
   return (
     <div className="order-checkout-summary">
       <h1>We hope it tastes well!</h1>

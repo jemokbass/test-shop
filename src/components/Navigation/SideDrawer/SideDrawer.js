@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
+
 import Logo from '@src/components/Logo/Logo';
 import Backdrop from '@src/components/UI/Backdrop/Backdrop';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import './SideDrawer.css';
 
-const SideDrawer = ({ show, closed, isAuthenticated }) => {
+const SideDrawer = props => {
+  const { show, closed, isAuthenticated } = props;
+
   let attachedClasses = ['side-drawer', 'close'];
 
   if (show) {

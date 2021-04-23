@@ -1,21 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import './Button.css';
 
-const Button = ({
-  children,
-  clicked,
-  type,
-  btnType,
-  uppercase,
-  disabled,
-  className,
-}) => {
+const Button = props => {
+  const { children, clicked, type, btnType, uppercase, disabled, className } = props;
+
   return (
     <button
-      className={['button', btnType, className, uppercase && 'uppercase'].join(
-        ' '
-      )}
+      className={['button', btnType, className, uppercase && 'uppercase'].join(' ')}
       onClick={clicked}
       type={type}
       disabled={disabled}

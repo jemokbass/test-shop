@@ -1,4 +1,5 @@
 import React from 'react';
+
 import BuildControl from './BuildControl/BuildControl';
 import './BuildControls.css';
 
@@ -32,12 +33,7 @@ const BuildControls = ({
           disabled={disabled[ctrl.type]}
         />
       ))}
-      <button
-        className="order-button"
-        type="button"
-        onClick={ordered}
-        disabled={!purchasable}
-      >
+      <button className="order-button" type="button" onClick={ordered} disabled={!purchasable}>
         {isAuthenticated ? 'ORDER NOW' : 'SIGN UP TO ORDER'}
       </button>
     </div>

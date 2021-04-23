@@ -1,46 +1,32 @@
-import React, { Component, Fragment } from 'react';
-import './Layout.css';
+import React, { Fragment, useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import ToolBar from '../Navigation/ToolBar/ToolBar';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
-import { connect } from 'react-redux';
+import './Layout.css';
 
-class Layout extends Component {
-  state = {
-    showSideDrawer: false,
+const Layout = props => {
+  const { children } = props;
+  const [showSideDrawer, setShowSideDrawer] = useState(false);
+  const isAuthenticated = useSelector(state => state.auth.token !== null);
+
+  const sideDrawerClosedHandler = () => {
+    setShowSideDrawer(false);
   };
 
-  sideDrawerClosedHandler = () => {
-    this.setState({ showSideDrawer: false });
-  };
-
-  sideDrawerToggleHandler = () => {
-    this.setState(prevState => {
-      return { showSideDrawer: !prevState.showSideDrawer };
+  const sideDrawerToggleHandler = () => {
+    setShowSideDrawer(prevState => {
+      return { showSideDrawer: !prevState };
     });
   };
 
-  render() {
-    const { children } = this.props;
+  return (
+    <Fragment>
+      <ToolBar isAuthenticated={isAuthenticated} drawerToggleClicked={sideDrawerToggleHandler} />
+      <SideDrawer show={showSideDrawer} closed={sideDrawerClosedHandler} isAuthenticated={isAuthenticated} />
+      <main className="content">{children}</main>
+    </Fragment>
+  );
+};
 
-    return (
-      <Fragment>
-        <ToolBar
-          isAuthenticated={this.props.isAuthenticated}
-          drawerToggleClicked={this.sideDrawerToggleHandler}
-        />
-        <SideDrawer
-          show={this.state.showSideDrawer}
-          closed={this.sideDrawerClosedHandler}
-          isAuthenticated={this.props.isAuthenticated}
-        />
-        <main className="content">{children}</main>
-      </Fragment>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.token !== null,
-});
-
-export default connect(mapStateToProps)(Layout);
+export default Layout;

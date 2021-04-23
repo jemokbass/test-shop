@@ -1,8 +1,11 @@
 import React from 'react';
+
 import NavigationItem from './NavigationItem/NavigationItem';
 import './NavigationItems.css';
 
-const NavigationItems = ({ isAuthenticated }) => {
+const NavigationItems = props => {
+  const { isAuthenticated } = props;
+
   let navigation = [
     { title: 'Burger Builder', link: '/', exact: true },
     { title: 'Authenticate', link: '/auth' },
@@ -17,14 +20,7 @@ const NavigationItems = ({ isAuthenticated }) => {
   return (
     <ul className="navigation-items">
       {navigation.map(item => {
-        return (
-          <NavigationItem
-            key={item.title}
-            children={item.title}
-            link={item.link}
-            exact={item.exact}
-          />
-        );
+        return <NavigationItem key={item.title} children={item.title} link={item.link} exact={item.exact} />;
       })}
     </ul>
   );

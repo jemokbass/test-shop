@@ -1,45 +1,33 @@
-import React, { Component } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from '@src/axios-orders';
+
 import Order from '@src/components/Order/Order';
 import withErrorHandler from '@src/hoc/withErrorHandler/withErrorHandler';
-import { connect } from 'react-redux';
 import { fetchOrders } from '@src/store/actions/order';
 import Spinner from '@src/components/UI/Spinner/Spinner';
 
-class Orders extends Component {
-  componentDidMount() {
-    this.props.onFetchOrders(this.props.token, this.props.userId);
+const Orders = props => {
+  const dispatch = useDispatch();
+  const allOrders = useSelector(state => state.order.orders);
+  const loading = useSelector(state => state.order.loading);
+  const token = useSelector(state => state.auth.token);
+  const userId = useSelector(state => state.auth.userId);
+  const onFetchOrders = useCallback((token, userId) => dispatch(fetchOrders(token, userId)), [dispatch]);
+
+  useEffect(() => {
+    onFetchOrders(token, userId);
+  }, [onFetchOrders, token, userId]);
+
+  let orders = <Spinner />;
+
+  if (!loading) {
+    orders = allOrders.map(order => (
+      <Order key={order.id} price={+order.price} ingredients={order.ingredients} />
+    ));
   }
 
-  render() {
-    let orders = <Spinner />;
+  return orders;
+};
 
-    if (!this.props.loading) {
-      orders = this.props.allOrders.map(order => (
-        <Order
-          key={order.id}
-          price={+order.price}
-          ingredients={order.ingredients}
-        />
-      ));
-    }
-
-    return orders;
-  }
-}
-
-const mapStateToProps = state => ({
-  allOrders: state.order.orders,
-  loading: state.order.loading,
-  token: state.auth.token,
-  userId: state.auth.userId,
-});
-
-const mapDispatchToProps = dispatch => ({
-  onFetchOrders: (token, userId) => dispatch(fetchOrders(token, userId)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withErrorHandler(Orders, axios));
+export default withErrorHandler(Orders, axios);
